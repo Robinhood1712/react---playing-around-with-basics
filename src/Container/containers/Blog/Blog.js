@@ -41,7 +41,9 @@ class Blog extends Component {
         const posts = this.state.posts.map(post => {
             return <Post
                      title = {post.title}
-                     key = {post.id}/>
+                     key = {post.id}
+                     author = {post.author}
+                     />
         })
 
 
