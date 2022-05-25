@@ -5,10 +5,15 @@ import UserOutput from './UserOutput';
 import UserInput from './UserInput';
 
 class App extends Component { 
-  
-    state = {
+
+  constructor(props){
+    super(props)
+      this.state = {
       username: 'ade'
     }
+  }
+  
+  
 
     eventChangeHandlerMethod = (event) => {
       this.setState({userName: event.target.value});
