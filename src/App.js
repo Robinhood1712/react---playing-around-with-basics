@@ -5,11 +5,18 @@ import Blog from './Container/containers/Blog/Blog';
 
 class App extends Component { 
 
-  constructor(props){
-    super(props)
-    //   this.state = {
-    //   username: 'ade'
-    // }
+  // constructor(props){
+  //   super(props)
+
+  //   this.componentDidMount (){
+  //     console.log ('[component will mount]')
+  //   }
+  //   //   this.state = {
+  //   //   username: 'ade'
+  //   // }
+  // }
+  componentDidMount (){
+    console.log ('[component will mount]')
   }
   
   

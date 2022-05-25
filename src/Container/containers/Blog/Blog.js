@@ -6,6 +6,10 @@ import NewPost from '../../../Components/components/NewPost/NewPost';
 import './Blog.css';
 
 class Blog extends Component {
+
+    
+
+
     render () {
         return (
             <div>
