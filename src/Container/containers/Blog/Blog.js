@@ -3,20 +3,21 @@ import React, { Component } from 'react';
 import Post from '../../../Components/components/Post/Post';
 import FullPost from '../../../Components/components/FullPost/FullPost';
 import NewPost from '../../../Components/components/NewPost/NewPost';
-// import Axios from ''
 import './Blog.css';
+import  Axios from 'axios';
 
 class Blog extends Component {
 
     constructor(props){
         super(props)
           this.state = {
-              posts: []
+              posts: [],
+              postSelectedId: null
             }
       }
 
     componentDidMount(){
-        axios.get('https:jsonplaceholder.typeicode.com').then(response => {
+        Axios.get('https:jsonplaceholder.typeicode.com').then(response => {
             // console.log(response)
             const posts = response.data.slice(0, 4)
             const updatedPost = posts.map(post => {
@@ -31,6 +32,13 @@ class Blog extends Component {
         })
     }
 
+    postSelectedHandler = (id) => {
+        this.setState({
+            postSelectedId: id
+
+        })
+    }
+
 
 
     
@@ -40,9 +48,11 @@ class Blog extends Component {
 
         const posts = this.state.posts.map(post => {
             return <Post
+                     clicked = {() => this.postSelectedHandler(post.id)}
                      title = {post.title}
                      key = {post.id}
                      author = {post.author}
+
                      />
         })
 
@@ -53,7 +63,7 @@ class Blog extends Component {
                     {posts}
                 </section>
                 <section>
-                    <FullPost />
+                    <FullPost id = {this.state.postSelectedId} />
                 </section>
                 <section>
                     <NewPost />
