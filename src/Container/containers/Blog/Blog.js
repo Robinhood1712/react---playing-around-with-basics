@@ -12,13 +12,13 @@ class Blog extends Component {
         super(props)
           this.state = {
               posts: [],
-              postSelectedId: null
+              postSelectedId: null,
+              error: false
             }
       }
 
     componentDidMount(){
-        axios.get('https:jsonplaceholder.typeicode.com').then(response => {
-            // console.log(response)
+        axios.get('https:jsonplaceholder.typeicode.com/posts').then(response => {
             const posts = response.data.slice(0, 4)
             const updatedPost = posts.map(post => {
                 return {
@@ -30,32 +30,39 @@ class Blog extends Component {
                 posts: updatedPost
             })
         })
+        .catch(error => {
+            // console.log(error)
+            this.setState({
+                error: error
+            })
+        })
     }
 
     postSelectedHandler = (id) => {
         this.setState({
             postSelectedId: id
-
         })
     }
 
-
-
-    
+  
 
 
     render () {
 
-        const posts = this.state.posts.map(post => {
-            return <Post
+        let posts = <p style={{textAlign: center}}>something went wrong</p>
+
+        if (!this.state.error){
+            posts = this.state.posts.map(post => {
+                return <Post
                      clicked = {() => this.postSelectedHandler(post.id)}
                      title = {post.title}
                      key = {post.id}
                      author = {post.author}
-
                      />
-        })
+            })
+        }
 
+          
 
         return (
             <div>

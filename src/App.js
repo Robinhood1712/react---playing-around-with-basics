@@ -15,9 +15,9 @@ class App extends Component {
   //   //   username: 'ade'
   //   // }
   // }
-  componentDidMount (){
-    console.log ('[component will mount]')
-  }
+  // componentDidMount (){
+  //   console.log ('[component will mount]')
+  // }
   
   
     render() {
