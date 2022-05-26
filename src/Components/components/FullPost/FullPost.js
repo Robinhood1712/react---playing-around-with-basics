@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 
+import  axios from 'axios';
 import './FullPost.css';
 
 class FullPost extends Component {
@@ -8,18 +8,24 @@ class FullPost extends Component {
     constructor(props){
         super(props)
           this.state = {
-              fetchedPost : null
+              loadedPost : null
             }
       }
 
-      componentDidMount () {
-          axios.get('getdata' + this.props.post.id).then(
-              response => {
-                  this.setState({
-                      fetchedPost: response.data
-                  })
-              }
-          )
+      componentDidUpdate () {
+
+        if (this.props.id){
+            if (!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.id)){
+                axios.get('https:jsonplaceholder.typeicode.com/posts/' + this.props.id ).then(
+                    response => {
+                        this.setState({
+                            loadedPost: response.data
+                        })
+                    }
+                )
+            }
+        }
+          
           
       }
 
@@ -27,12 +33,16 @@ class FullPost extends Component {
 
     render () {
         let post = <p>Please select a Post!</p>;
+
         if (this.props.id){
+            post = <p>loading</p>
+        }
+        if (this.state.loadedPost){
 
             post = (
                 <div className="FullPost">
-                    <h1>{this.state.fetchedPost}</h1>
-                    <p>Content</p>
+                    <h1>{this.state.loadedPost.title}</h1>
+                    <p>{this.state.loadedPost.body}</p>
                     <div className="Edit">
                         <button className="Delete">Delete</button>
                     </div>

@@ -4,7 +4,7 @@ import Post from '../../../Components/components/Post/Post';
 import FullPost from '../../../Components/components/FullPost/FullPost';
 import NewPost from '../../../Components/components/NewPost/NewPost';
 import './Blog.css';
-import  Axios from 'axios';
+import  axios from 'axios';
 
 class Blog extends Component {
 
@@ -17,7 +17,7 @@ class Blog extends Component {
       }
 
     componentDidMount(){
-        Axios.get('https:jsonplaceholder.typeicode.com').then(response => {
+        axios.get('https:jsonplaceholder.typeicode.com').then(response => {
             // console.log(response)
             const posts = response.data.slice(0, 4)
             const updatedPost = posts.map(post => {
